@@ -49,7 +49,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/filebrowser-docker
-            export FB_USERNAME=${{ secrets.REDIS_PASSWORD }}
-            export FB_PASSWORD=${{ secrets.REDIS_PASSWORD }}
+            export FB_USERNAME=${{ secrets.FB_USERNAME }}
+            export FB_PASSWORD=${{ secrets.FB_PASSWORD }}
             docker-compose down
             docker-compose up -d
