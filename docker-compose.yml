@@ -11,4 +11,5 @@ services:
       - FB_BASEURL=/
       - FB_USERNAME=${FB_USERNAME}
       - FB_PASSWORD=${FB_PASSWORD}
+    command: ["/filebrowser", "-d", "/database/filebrowser.db"]
     restart: unless-stopped
