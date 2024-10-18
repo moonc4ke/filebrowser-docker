@@ -11,6 +11,6 @@ services:
       - FB_BASEURL=/
       - FB_USERNAME=${FB_USERNAME}
       - FB_PASSWORD=${FB_PASSWORD}
-      - PUID=$(id -u)
-      - PGID=$(id -g)
+      - PUID=1000
+      - PGID=1000
     restart: unless-stopped
