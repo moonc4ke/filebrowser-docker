@@ -1,1 +1,27 @@
-database/
+# File Browser database
+db/filebrowser.db
+
+# Docker volumes
+docker_volumes/
+
+# Logs
+*.log
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
