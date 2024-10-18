@@ -9,8 +9,8 @@ services:
       - ./db/filebrowser.db:/database/filebrowser.db
     environment:
       - FB_BASEURL=/
-      - FB_USERNAME=test
-      - FB_PASSWORD=test
+      - FB_USERNAME=${FB_USERNAME}
+      - FB_PASSWORD=${FB_PASSWORD}
       - PUID=1000
       - PGID=1000
     restart: unless-stopped
