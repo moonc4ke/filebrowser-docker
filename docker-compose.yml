@@ -9,6 +9,5 @@ services:
       - ./db:/database
     environment:
       - FB_BASEURL=/
-      - FB_USERNAME=${FB_USERNAME}
-      - FB_PASSWORD=${FB_PASSWORD}
+    command: ["/filebrowser", "--database", "/database/filebrowser.db"]
     restart: unless-stopped
