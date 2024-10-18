@@ -4,6 +4,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -23,6 +24,7 @@ jobs:
             if ! ssh-keygen -F github.com > /dev/null; then
               ssh-keyscan github.com >> ~/.ssh/known_hosts
             fi
+
       - name: SSH and update code
         uses: appleboy/ssh-action@v0.1.5
         with:
@@ -38,7 +40,8 @@ jobs:
               git clone git@github.com:moonc4ke/filebrowser-docker.git filebrowser-docker
               cd filebrowser-docker
             fi
-      - name: Run Docker Compose
+
+      - name: Run Docker Compose and Setup User
         uses: appleboy/ssh-action@v0.1.5
         with:
           host: ${{ secrets.UBUNTU_SERVER_IP }}
@@ -46,8 +49,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/filebrowser-docker
-            mkdir -p filebrowser-data
-            export FB_USERNAME=${{ secrets.FB_USERNAME }}
-            export FB_PASSWORD=${{ secrets.FB_PASSWORD }}
+            echo "FB_USERNAME=${{ secrets.FB_USERNAME }}" > .env
+            echo "FB_PASSWORD=${{ secrets.FB_HASHED_PASSWORD }}" >> .env
             docker-compose down
             docker-compose up -d
