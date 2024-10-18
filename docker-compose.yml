@@ -6,11 +6,10 @@ services:
       - "7777:80"
     volumes:
       - /home/dondoncece/main-storage:/srv
-      - ./db/filebrowser.db:/database/filebrowser.db
+      - ./filebrowser-data:/database
     environment:
-      - FB_BASEURL=/
+      - FB_DATABASE=/database/filebrowser.db
+      - FB_ROOT=/srv
       - FB_USERNAME=${FB_USERNAME}
       - FB_PASSWORD=${FB_PASSWORD}
-      - PUID=1000
-      - PGID=1000
     restart: unless-stopped
