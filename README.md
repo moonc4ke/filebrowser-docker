@@ -123,7 +123,7 @@ Check the Caddy service status:
 sudo systemctl status caddy
 ```
 
-## Step 6: After Server Setup You Can Deploy Repo via Github
+## Step 5: After Server Setup You Can Deploy Repo via Github
 
 1\. **Add Secrets to GitHub**:
 
@@ -132,8 +132,6 @@ sudo systemctl status caddy
 - Add the following secrets:
 - `SSH_PRIVATE_KEY`: Your private SSH key.
 - `UBUNTU_SERVER_IP`: Your Ubuntu Server IP address.
-- `FB_USERNAME`: Your Filebrowser username.
-- `FB_PASSWORD`: Your Filebrowser password.
 
 These secrets are used in the GitHub Actions workflow to securely deploy your application.
 
@@ -145,7 +143,9 @@ These secrets are used in the GitHub Actions workflow to securely deploy your ap
 docker service ls
 ```
 
-## Step 7: Install Yacht
+4\. Make sure to change admin:admin to a secure username and password after file browser is up and running
+
+## Step 6: Install Yacht
 
 Install Yacht via Docker https://github.com/SelfhostedPro/Yacht
 
