@@ -8,5 +8,7 @@ services:
       - /home/dondoncece/main-storage:/srv
       - ./db:/database
     environment:
-      - FB_BASEURL=/filebrowser
+      - FB_BASEURL=/
+      - FB_USERNAME=${FB_USERNAME}
+      - FB_PASSWORD=${FB_PASSWORD}
     restart: unless-stopped

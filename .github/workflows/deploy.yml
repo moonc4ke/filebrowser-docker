@@ -1,5 +1,4 @@
 name: Deploy to VPS
-
 on:
   push:
     branches:
@@ -51,5 +50,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/filebrowser-docker
+            echo "FB_USERNAME=${{ secrets.FB_USERNAME }}" > .env
+            echo "FB_PASSWORD=${{ secrets.FB_PASSWORD }}" >> .env
             docker-compose down
             docker-compose up -d
+            rm .env

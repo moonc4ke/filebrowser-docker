@@ -8,12 +8,15 @@
 ## Step 1: Connect
 
 1\. **Connect to Your Ubuntu Server**:
+
 ```sh
 ssh user@YOUR-UBUNTU-SERVER-IP-ADDRESS
 ```
 
 ## Step 2: Install Docker on Your Ubuntu Server
+
 1\. **Install Docker**:
+
 ```sh
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
@@ -26,6 +29,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 ```
 
 2\. **Install Docker Compose**:
+
 ```sh
 sudo apt-get install docker-compose-plugin
 sudo curl -L "https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -33,24 +37,29 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 3\. **Add User to Docker Group**:
+
 ```sh
 sudo usermod -aG docker $USER
 newgrp docker
 ```
 
 ## Step 3: Generate SSH Key and Add to GitHub
+
 1\. **Generate the SSH Key Pair on your Ubuntu Server**:
+
 ```sh
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 2\. **Add the Public Key to `authorized_keys`**:
+
 ```sh
 cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
 3\. **Retrieve the Private Key**:
+
 ```sh
 cat ~/.ssh/id_ed25519
 ```
@@ -58,9 +67,11 @@ cat ~/.ssh/id_ed25519
 4\. **Copy the content of the private key** to use in GitHub Secrets as SSH_PRIVATE_KEY.
 
 5\. **Add the SSH Public Key to GitHub**:
+
 ```sh
 cat ~/.ssh/id_ed25519.pub
 ```
+
 - Go to GitHub and log in to your account.
 - In the upper-right corner of any page, click your profile photo, then click **Settings**.
 - In the user settings sidebar, click **SSH and GPG keys**.
@@ -115,17 +126,21 @@ sudo systemctl status caddy
 ## Step 6: After Server Setup You Can Deploy Repo via Github
 
 1\. **Add Secrets to GitHub**:
+
 - Go to your GitHub repository.
 - Navigate to `Settings` > `Secrets and variables` > `Actions`.
 - Add the following secrets:
 - `SSH_PRIVATE_KEY`: Your private SSH key.
 - `UBUNTU_SERVER_IP`: Your Ubuntu Server IP address.
+- `FB_USERNAME`: Your Filebrowser username.
+- `FB_PASSWORD`: Your Filebrowser password.
 
 These secrets are used in the GitHub Actions workflow to securely deploy your application.
 
 2\. **Now You Can Commit Changes to the Github Repository and Deploy it should automatically deploy to Ubuntu Server**
 
 3\. **After Deployment You Can Check the Service Status with this Command Inside of Ubuntu Server**
+
 ```sh
 docker service ls
 ```
@@ -135,6 +150,7 @@ docker service ls
 Install Yacht via Docker https://github.com/SelfhostedPro/Yacht
 
 You must use selfhostedpro/yacht:devel
+
 ```sh
 docker volume create yacht
 docker run -d --name yacht -p 8000:8000 --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v yacht:/config selfhostedpro/yacht:devel
