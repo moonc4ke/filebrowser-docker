@@ -49,6 +49,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/filebrowser-docker
+            export FB_USERNAME=${{ secrets.REDIS_PASSWORD }}
+            export FB_PASSWORD=${{ secrets.REDIS_PASSWORD }}
             docker-compose down
             docker-compose up -d
-            docker-compose exec -T filebrowser filebrowser users add ${{ secrets.FB_USERNAME }} ${{ secrets.FB_PASSWORD }} --perm.admin
