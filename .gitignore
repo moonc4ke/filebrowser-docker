@@ -1,5 +1,5 @@
 # File Browser database
-db/filebrowser.db
+db/
 
 # Docker volumes
 docker_volumes/
