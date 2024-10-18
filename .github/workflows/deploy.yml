@@ -54,4 +54,3 @@ jobs:
             echo "FB_PASSWORD=${{ secrets.FB_PASSWORD }}" >> .env
             docker-compose down
             docker-compose up -d
-            rm .env
