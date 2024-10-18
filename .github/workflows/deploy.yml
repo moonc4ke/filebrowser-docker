@@ -1,0 +1,55 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: vps-deploy
+      cancel-in-progress: false
+
+    steps:
+      - name: Check and Add GitHub to known hosts if not present
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.UBUNTU_SERVER_IP }}
+          username: dondoncece
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            [ -d ~/.ssh ] || mkdir -p ~/.ssh
+            [ -f ~/.ssh/known_hosts ] || touch ~/.ssh/known_hosts
+            if ! ssh-keygen -F github.com > /dev/null; then
+              ssh-keyscan github.com >> ~/.ssh/known_hosts
+            fi
+
+      - name: SSH and update code
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.UBUNTU_SERVER_IP }}
+          username: dondoncece
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~
+            if [ -d "filebrowser-docker" ]; then
+              cd filebrowser-docker
+              git pull origin main
+            else
+              git clone git@github.com:moonc4ke/filebrowser-docker.git filebrowser-docker
+              cd filebrowser-docker
+            fi
+
+      - name: Run Docker Compose
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.UBUNTU_SERVER_IP }}
+          username: dondoncece
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/filebrowser-docker
+            docker-compose down
+            docker-compose up -d
