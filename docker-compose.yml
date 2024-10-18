@@ -6,7 +6,7 @@ services:
       - "7777:80"
     volumes:
       - /home/dondoncece/main-storage:/srv
-      - ./db:/database
+      - ./db/filebrowser.db:/database/filebrowser.db
     environment:
       - FB_BASEURL=/
       - FB_USERNAME=${FB_USERNAME}
