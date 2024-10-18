@@ -9,5 +9,5 @@ services:
       - ./db:/database
     environment:
       - FB_BASEURL=/
-    command: ["/filebrowser", "--database", "/database/filebrowser.db"]
+    command: ["--database", "/database/filebrowser.db"]
     restart: unless-stopped
