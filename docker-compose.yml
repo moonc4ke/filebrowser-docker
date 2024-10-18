@@ -1,7 +1,7 @@
 version: "3"
 services:
   filebrowser:
-    image: filebrowser/filebrowser:s6
+    image: filebrowser/filebrowser:v2
     ports:
       - "7777:80"
     volumes:
