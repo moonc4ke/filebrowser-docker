@@ -10,6 +10,4 @@ services:
     environment:
       - FB_DATABASE=/database/filebrowser.db
       - FB_ROOT=/srv
-      - FB_USERNAME=${FB_USERNAME}
-      - FB_PASSWORD=${FB_PASSWORD}
     restart: unless-stopped
