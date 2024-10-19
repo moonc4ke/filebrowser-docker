@@ -144,18 +144,3 @@ docker service ls
 ```
 
 4\. Make sure to change admin:admin to a secure username and password after file browser is up and running
-
-## Step 6: Install Yacht
-
-Install Yacht via Docker https://github.com/SelfhostedPro/Yacht
-
-You must use selfhostedpro/yacht:devel
-
-```sh
-docker volume create yacht
-docker run -d --name yacht -p 8000:8000 --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v yacht:/config selfhostedpro/yacht:devel
-```
-
-Now you can access Yacht via UBUNTU_SERVER_IP_ADDRESS:8000
-
-After installing Yacht change admin@yacht.local password
